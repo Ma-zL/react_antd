@@ -3,6 +3,7 @@ import createSagaMiddleware from "redux-saga";
 import createReducer from "../utils/createReducer";
 
 export const sagaMiddleware = createSagaMiddleware();
+
 let finalCreateStore = compose(
   applyMiddleware(sagaMiddleware),
   window.devToolsExtension ? window.devToolsExtension() : (f) => f

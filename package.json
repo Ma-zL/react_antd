@@ -2,6 +2,17 @@
   "name": "antd-03",
   "version": "0.1.0",
   "private": true,
+  "devServer": {
+    "proxy": {
+      "/api": {
+        "target": "http://192.168.3.139",
+        "ws": true,
+        "pathRewrite": {
+          "^/api": "/"
+        }
+      }
+    }
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -12,17 +23,18 @@
     "eslint-plugin-prettier": "^3.1.2",
     "less": "^3.11.1",
     "less-loader": "^5.0.0",
+    "lodash": "^4.17.15",
     "prettier": "^2.0.2",
     "react": "^16.13.1",
     "react-app-rewired": "2.1.1",
     "react-dom": "^16.13.1",
+    "react-i18nify": "^3.1.6",
     "react-redux": "^7.2.0",
     "react-redux-spinner": "^2.0.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "redux": "^4.0.5",
-    "redux-saga": "^1.1.3",
-    "redux-thunk": "^2.3.0"
+    "redux-saga": "^1.1.3"
   },
   "scripts": {
     "start": "react-app-rewired start",

@@ -22,7 +22,6 @@ init().then(() => {
   ReactDOM.render(
     <Provider store={store}>
       <Routers />
-      abcdew
     </Provider>,
     document.getElementById("root")
   );

@@ -1,8 +1,33 @@
-import { URL_CONFIG_PATH, URL_KEY } from "../constants/const";
+import { URL_CONFIG_PATH, URL_KEY, SETTINGS_KEY } from "../constants/const";
 import fetch from "./fetch";
 
-const convertUrl = (urls, developeMode) => {
-  return urls;
+const convertUrl = (json, developeMode) => {
+  console.log("urls: --", json);
+  const result = {};
+  for (let key in json) {
+    let urlItem = json[key],
+      type = urlItem.Type,
+      protocol =
+        type === "api"
+          ? window.location.protocol
+          : window.location.protocol === "http:"
+          ? "ws:"
+          : "wss:",
+      ipAddress = developeMode
+        ? urlItem.Address
+        : `${protocol}//${window.location.host}`;
+
+    for (let key in urlItem.URL) {
+      if (!urlItem.URL.hasOwnProperty(key)) {
+        return;
+      }
+
+      let url = urlItem.URL[key];
+      url = url.startsWith("/") ? url.substring(1, url.length) : url;
+      result[key] = `${ipAddress}/${url}`;
+    }
+  }
+  return result;
 };
 
 const getUrl = async (urlProvider = convertUrl) => {
@@ -12,7 +37,10 @@ const getUrl = async (urlProvider = convertUrl) => {
   }
 
   const urls = await fetch.get(URL_CONFIG_PATH),
-    result = urlProvider(urls);
+    settingsConfig =
+      sessionStorage.getItem(SETTINGS_KEY) &&
+      JSON.parse(sessionStorage.getItem(SETTINGS_KEY)),
+    result = urlProvider(urls, settingsConfig.development);
   sessionStorage.setItem(URL_KEY, JSON.stringify(result));
   return Promise.resolve(result);
 };
