@@ -1,13 +1,10 @@
 import fetch from "../commons/utils/fetch";
 import getUrl from "../commons/utils/urlHelper";
 
-export async function login(userName, password) {
+export async function login(loginPost) {
   let urls = await getUrl();
-  let postData = {
-    format: "ISCLoginDTO",
-    id: userName,
-    encryptedpassword: password,
-  };
 
-  return fetch.post(urls.login, postData);
+  return fetch.postForm(urls.login, loginPost, {
+    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+  });
 }

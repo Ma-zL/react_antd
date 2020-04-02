@@ -2,17 +2,7 @@
   "name": "antd-03",
   "version": "0.1.0",
   "private": true,
-  "devServer": {
-    "proxy": {
-      "/api": {
-        "target": "http://192.168.3.139",
-        "ws": true,
-        "pathRewrite": {
-          "^/api": "/"
-        }
-      }
-    }
-  },
+  "proxy": "http://192.168.3.139",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -33,6 +23,7 @@
     "react-redux-spinner": "^2.0.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
+    "react-thunk": "^1.0.0",
     "redux": "^4.0.5",
     "redux-saga": "^1.1.3"
   },

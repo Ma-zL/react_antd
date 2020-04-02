@@ -139,8 +139,30 @@ function del(url, pd) {
   return fetchApi(url, op);
 }
 
+/**
+ * Call server API based on HTTP POST
+ * @example
+ * import Fetch from 'core/v2/fetch';
+ * Fetch.post('http://api/user/login', {user:'zach', password:'pass'})
+ *      .then(status=>console.log(user)).catch(err=>throw err);
+ *
+ * @param {string} url
+ * @param {object} pd
+ * @returns Promise
+ */
+function postForm(url, pd, hd = {}) {
+  let op = Object.assign({}, option, {
+    method: "POST",
+    body: JSON.stringify(pd),
+    headers: getCustomHeader(hd),
+  });
+
+  return fetchApi(url, op);
+}
+
 export default {
   get,
   post,
   del,
+  postForm,
 };

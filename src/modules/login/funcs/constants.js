@@ -11,9 +11,9 @@ export const LOGIN_REQUEST = "LOGIN/TEST_ACTION";
 /**
  * define actions
  */
-export const loginAction = (count) => {
+export const loginAction = (loginPost) => {
   return {
     type: LOGIN_REQUEST,
-    count,
+    loginPost,
   };
 };

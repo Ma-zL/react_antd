@@ -3,9 +3,9 @@ import * as constants from "./constants";
 import { message } from "antd";
 import * as apis from "../../../apis/login";
 
-function* callLogin() {
+function* callLogin({ loginPost }) {
   try {
-    const result = yield call(apis.login);
+    const result = yield call(apis.login, loginPost);
     if (result && result.status) {
       if (result.status.code === "00000000") {
         console.log("result: _______", result);
@@ -21,10 +21,6 @@ function* callLogin() {
   }
 }
 
-function* loginSaga() {
-  yield takeEvery(constants.LOGIN_REQUEST, callLogin);
-}
-
 export default function* root() {
-  yield [fork(loginSaga)];
+  yield takeEvery(constants.LOGIN_REQUEST, callLogin);
 }

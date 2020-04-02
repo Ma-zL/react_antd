@@ -2,6 +2,6 @@
   "ISC-LOGIN": {
     "Address": "/api",
     "Type": "api",
-    "URL": { "login": "api/login" }
+    "URL": { "login": "login" }
   }
 }
