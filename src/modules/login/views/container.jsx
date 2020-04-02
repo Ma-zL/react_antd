@@ -4,21 +4,30 @@ import { connect } from "react-redux";
 import { Form, Input, Button, Checkbox } from "antd";
 import * as constants from "../funcs/constants";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import _ from "lodash";
+import { withRouter } from "react-router-dom";
+
+import { I18n } from "react-i18nify";
 
 class Login extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       backgroundUrl: "./static/media/background.jpg",
     };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (!_.isEqual(prevProps.loginSuccess, this.props.loginSuccess)) {
+      let history = this.props.history;
+      history.push("/mainDashboard");
+    }
   }
 
   onFinish = (values) => {
     let formData = new FormData();
     formData.append("name", values.username);
     formData.append("password", values.password);
-    console.log(formData.get("name"));
-    console.log(formData.get("password"));
     this.props.loginRequest(formData);
   };
 
@@ -51,7 +60,7 @@ class Login extends React.Component {
           >
             <Input
               prefix={<UserOutlined className="site-form-item-icon" />}
-              placeholder="Username"
+              placeholder={I18n.t("login.userName")}
             />
           </Form.Item>
           <Form.Item
@@ -102,7 +111,9 @@ Login.defaultProps = {};
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    count: state[constants.REDUCER_NAME] && state[constants.REDUCER_NAME].count,
+    loginSuccess:
+      state[constants.REDUCER_NAME] &&
+      state[constants.REDUCER_NAME].loginSuccess,
   };
 };
 
@@ -114,4 +125,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login));

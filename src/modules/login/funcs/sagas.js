@@ -1,23 +1,19 @@
-import { put, takeEvery, call, fork } from "redux-saga/effects";
+import { put, takeEvery, call } from "redux-saga/effects";
 import * as constants from "./constants";
 import { message } from "antd";
-import * as apis from "../../../apis/login";
+import * as apis from "apis/login";
 
 function* callLogin({ loginPost }) {
   try {
     const result = yield call(apis.login, loginPost);
-    if (result && result.status) {
-      if (result.status.code === "00000000") {
-        console.log("result: _______", result);
-        yield put(message.success("call login success"));
-      } else {
-        yield put(message.warn(result.status.message));
-      }
+    if (result.code === "200") {
+      yield put(constants.loginSuccess());
+      yield put(message.success("Login success"));
     } else {
-      yield put(message.error("call login fail"));
+      yield put(message.warn(result.msg));
     }
   } catch (e) {
-    yield put(message.error("call login fail"));
+    // yield put(message.error("Login fail"));
   }
 }
 

@@ -1,5 +1,5 @@
 import * as actions from "./actionTypes";
-import createReducer from "../../../commons/utils/reducerHelper";
+import createReducer from "commons/utils/reducerHelper";
 
 const initialState = {
   isValid: false,

@@ -153,12 +153,27 @@ function del(url, pd) {
 function postForm(url, pd, hd = {}) {
   let op = Object.assign({}, option, {
     method: "POST",
-    body: JSON.stringify(pd),
-    headers: getCustomHeader(hd),
+    body: pd,
+    headers: getCustomHeader22(hd),
   });
 
   return fetchApi(url, op);
 }
+
+// private
+let getCustomHeader22 = function (header = {}) {
+  let result = {
+    Accept: "application/json",
+    ...header,
+  };
+
+  let token = tokenHelper.get();
+  if (token) {
+    result[TOKEN_KEY] = token;
+  }
+
+  return result;
+};
 
 export default {
   get,

@@ -1,3 +1,9 @@
 {
-  "development": true
+  "development": true,
+  "defaultLanguage": "en-US",
+  "languages": {
+    "en-US": "en",
+    "zh-CN": "zh",
+    "th-TH": "th"
+  }
 }

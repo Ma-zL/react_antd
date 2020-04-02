@@ -1,4 +1,4 @@
-import { put, call, takeLatest, fork } from "redux-saga/effects";
+import { put, takeLatest, fork } from "redux-saga/effects";
 import { LOGIN_REQUEST, LOGOUT_REQUEST } from "./actionTypes";
 import { message } from "antd";
 

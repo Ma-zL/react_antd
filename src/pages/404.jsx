@@ -1,5 +1,5 @@
 import React from "react";
-import { view as NotFound } from "../modules/errorPages";
+import { view as NotFound } from "modules/errorPages";
 
 export const NotFounds = () => {
   return (
