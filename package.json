@@ -33,6 +33,11 @@
     "eject": "react-scripts eject",
     "lint": "eslint src --ext .js,.jsx && stylelint \"./src/**/*.less\""
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -57,6 +62,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-standard": "^4.0.1",
+    "husky": "^4.2.3",
     "stylelint": "^13.2.1",
     "stylelint-config-standard": "^20.0.0"
   }
