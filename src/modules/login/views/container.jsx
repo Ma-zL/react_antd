@@ -25,7 +25,7 @@ class Login extends React.Component {
 	}
 
 	onFinish = values => {
-		const formData = new FormData();
+		let formData = new FormData();
 		formData.append("name", values.username);
 		formData.append("password", values.password);
 		this.props.loginRequest(formData);
