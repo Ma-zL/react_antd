@@ -31,11 +31,12 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
-    "lint": "eslint src --ext .js,.jsx && stylelint \"./src/**/*.less\"",
-    "precommit": "lint-staged"
+    "lint": "eslint src --ext .js,.jsx && stylelint \"./src/**/*.less\""
   },
-  "lint-staged": {
-    "src/**/*.js": "eslint"
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && npm run test"
+    }
   },
   "eslintConfig": {
     "extends": "react-app"
