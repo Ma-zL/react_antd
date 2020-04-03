@@ -31,12 +31,11 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
-    "lint": "eslint src --ext .js,.jsx && stylelint \"./src/**/*.less\""
+    "lint": "eslint src --ext .js,.jsx && stylelint \"./src/**/*.less\"",
+    "precommit": "lint-staged"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint"
-    }
+  "lint-staged": {
+    "src/**/*.js": "eslint"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -63,6 +62,7 @@
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-standard": "^4.0.1",
     "husky": "^4.2.3",
+    "lint-staged": "^10.1.1",
     "stylelint": "^13.2.1",
     "stylelint-config-standard": "^20.0.0"
   }

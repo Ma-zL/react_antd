@@ -19,20 +19,20 @@ class Login extends React.Component {
 
 	componentDidUpdate(prevProps) {
 		if (!_.isEqual(prevProps.loginSuccess, this.props.loginSuccess)) {
-			let history = this.props.history;
+			const history = this.props.history;
 			history.push("/mainDashboard");
 		}
 	}
 
 	onFinish = values => {
-		let formData = new FormData();
+		const formData = new FormData();
 		formData.append("name", values.username);
 		formData.append("password", values.password);
 		this.props.loginRequest(formData);
 	};
 
 	render() {
-		const { backgroundUrl } = this.state;
+		let { backgroundUrl } = this.state;
 		return (
 			<div
 				className="login_cont"
