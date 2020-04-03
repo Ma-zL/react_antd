@@ -6,7 +6,7 @@ import * as constants from "../funcs/constants";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import _ from "lodash";
 import { withRouter } from "react-router-dom";
-
+import PropTypes from "prop-types";
 import { I18n } from "react-i18nify";
 
 class Login extends React.Component {
@@ -19,14 +19,13 @@ class Login extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (!_.isEqual(prevProps.loginSuccess, this.props.loginSuccess)) {
-      let history = this.props.history;
+      const history = this.props.history;
       history.push("/mainDashboard");
-      console.log("aa");
     }
   }
 
-  onFinish = values => {
-    let formData = new FormData();
+  onFinish = (values) => {
+    const formData = new FormData();
     formData.append("name", values.username);
     formData.append("password", values.password);
     this.props.loginRequest(formData);
@@ -106,7 +105,11 @@ class Login extends React.Component {
   }
 }
 
-Login.propTypes = {};
+Login.propTypes = {
+  loginSuccess: PropTypes.bool,
+  history: PropTypes.object,
+  loginRequest: PropTypes.func
+};
 
 Login.defaultProps = {};
 
@@ -118,9 +121,9 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    loginRequest: loginPost => {
+    loginRequest: (loginPost) => {
       dispatch(constants.loginAction(loginPost));
     }
   };
