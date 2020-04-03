@@ -19,7 +19,7 @@ class Login extends React.Component {
 
 	componentDidUpdate(prevProps) {
 		if (!_.isEqual(prevProps.loginSuccess, this.props.loginSuccess)) {
-			const history = this.props.history;
+			let history = this.props.history;
 			history.push("/mainDashboard");
 		}
 	}
