@@ -13,7 +13,7 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      backgroundUrl: "./static/media/background.jpg",
+      backgroundUrl: "./static/media/background.jpg"
     };
   }
 
@@ -21,10 +21,11 @@ class Login extends React.Component {
     if (!_.isEqual(prevProps.loginSuccess, this.props.loginSuccess)) {
       let history = this.props.history;
       history.push("/mainDashboard");
+      console.log("aa");
     }
   }
 
-  onFinish = (values) => {
+  onFinish = values => {
     let formData = new FormData();
     formData.append("name", values.username);
     formData.append("password", values.password);
@@ -38,14 +39,14 @@ class Login extends React.Component {
         className="login_cont"
         style={{
           background: `transparent url(${backgroundUrl}) 100% 100% no-repeat`,
-          backgroundSize: "cover",
+          backgroundSize: "cover"
         }}
       >
         <Form
           name="normal_login"
           className="login_form"
           initialValues={{
-            remember: true,
+            remember: true
           }}
           onFinish={this.onFinish}
         >
@@ -54,8 +55,8 @@ class Login extends React.Component {
             rules={[
               {
                 required: true,
-                message: "Please input your Username!",
-              },
+                message: "Please input your Username!"
+              }
             ]}
           >
             <Input
@@ -68,8 +69,8 @@ class Login extends React.Component {
             rules={[
               {
                 required: true,
-                message: "Please input your Password!",
-              },
+                message: "Please input your Password!"
+              }
             ]}
           >
             <Input
@@ -113,15 +114,15 @@ const mapStateToProps = (state, ownProps) => {
   return {
     loginSuccess:
       state[constants.REDUCER_NAME] &&
-      state[constants.REDUCER_NAME].loginSuccess,
+      state[constants.REDUCER_NAME].loginSuccess
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    loginRequest: (loginPost) => {
+    loginRequest: loginPost => {
       dispatch(constants.loginAction(loginPost));
-    },
+    }
   };
 };
 
