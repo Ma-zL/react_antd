@@ -15,25 +15,25 @@ sagaMiddleware.run(sagas);
 injectAsyncReducer(store, reducerName, reducer);
 
 async function init() {
-  const settings = await getSettings(),
-    urls = await getUrl(),
-    lang = await getLang(settings.defaultLanguage);
-  return Promise.resolve({ urls, settings, lang });
+	const settings = await getSettings(),
+		urls = await getUrl(),
+		lang = await getLang(settings.defaultLanguage);
+	return Promise.resolve({ urls, settings, lang });
 }
 
-init().then((d) => {
-  I18n.setTranslations(d.lang);
-  I18n.setLocale(d.settings.languages[d.settings.defaultLanguage]);
-  ReactDOM.render(
-    <Provider store={store}>
-      <Routers />
-    </Provider>,
-    document.getElementById("root")
-  );
+init().then(d => {
+	I18n.setTranslations(d.lang);
+	I18n.setLocale(d.settings.languages[d.settings.defaultLanguage]);
+	ReactDOM.render(
+		<Provider store={store}>
+			<Routers />
+		</Provider>,
+		document.getElementById("root")
+	);
 });
 
 if (module.hot) {
-  module.hot.accept();
+	module.hot.accept();
 }
 
 // If you want your app to work offline and load faster, you can change

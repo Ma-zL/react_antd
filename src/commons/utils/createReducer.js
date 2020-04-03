@@ -10,10 +10,10 @@ import { combineReducers } from "redux";
 import { pendingTasksReducer } from "react-redux-spinner";
 
 export default function createReducer(asyncReducers) {
-  let reducers = {};
-  //   reducers[messageReducerName] = messageReducer;
-  //   reducers[authReducerName] = authReducer;
+	const reducers = {};
+	//   reducers[messageReducerName] = messageReducer;
+	//   reducers[authReducerName] = authReducer;
 
-  reducers["pendingTasks"] = pendingTasksReducer;
-  return combineReducers(Object.assign({}, reducers, asyncReducers));
+	reducers.pendingTasks = pendingTasksReducer;
+	return combineReducers(Object.assign({}, reducers, asyncReducers));
 }

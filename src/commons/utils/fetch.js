@@ -17,61 +17,63 @@ import "whatwg-fetch";
 
 // const invalidTokenCode = ["2007020009", "07010402"];
 
-const ThrowErrMsg = (err) => {
-  if (typeof err === "object") {
-    err.message =
-      err.message === "Failed to fetch" ? "Service Unavailable" : err.message;
-    return err;
-  }
-  return err;
+const ThrowErrMsg = err => {
+	if (typeof err === "object") {
+		err.message =
+			err.message === "Failed to fetch"
+				? "Service Unavailable"
+				: err.message;
+		return err;
+	}
+	return err;
 };
 
-let IsJsonString = function (str) {
-  try {
-    JSON.parse(str);
-  } catch (e) {
-    return false;
-  }
-  return true;
-};
-
-// private
-let fetchApi = function (url, option) {
-  return fetch(url, option)
-    .then((res) => {
-      return res.text();
-    })
-    .then((text) => {
-      // let res = IsJsonString(text) ? JSON.parse(text) : text;
-      // if (res && res.status && invalidTokenCode.includes(res.status.code)) {
-      //   invalidToken();
-      // }
-      return IsJsonString(text) ? JSON.parse(text) : text;
-    })
-    .catch((err) => {
-      throw ThrowErrMsg(err);
-    });
+const IsJsonString = function (str) {
+	try {
+		JSON.parse(str);
+	} catch (e) {
+		return false;
+	}
+	return true;
 };
 
 // private
-let getCustomHeader = function (header = {}) {
-  let result = {
-    Accept: "application/json",
-    "Content-Type": "application/json",
-    ...header,
-  };
-
-  let token = tokenHelper.get();
-  if (token) {
-    result[TOKEN_KEY] = token;
-  }
-
-  return result;
+const fetchApi = function (url, option) {
+	return fetch(url, option)
+		.then(res => {
+			return res.text();
+		})
+		.then(text => {
+			// let res = IsJsonString(text) ? JSON.parse(text) : text;
+			// if (res && res.status && invalidTokenCode.includes(res.status.code)) {
+			//   invalidToken();
+			// }
+			return IsJsonString(text) ? JSON.parse(text) : text;
+		})
+		.catch(err => {
+			throw ThrowErrMsg(err);
+		});
 };
 
-let option = {
-  mode: "cors",
-  cache: "default",
+// private
+const getCustomHeader = function (header = {}) {
+	const result = {
+		Accept: "application/json",
+		"Content-Type": "application/json",
+		...header
+	};
+
+	const token = tokenHelper.get();
+	if (token) {
+		result[TOKEN_KEY] = token;
+	}
+
+	return result;
+};
+
+const option = {
+	mode: "cors",
+	cache: "default"
 };
 
 /**
@@ -84,16 +86,16 @@ let option = {
  * @returns Promise
  */
 function get(url, fileHeader, header) {
-  let op = Object.assign(
-    {},
-    option,
-    {
-      method: "GET",
-      headers: getCustomHeader(header),
-    },
-    fileHeader
-  );
-  return fetchApi(url, op);
+	const op = Object.assign(
+		{},
+		option,
+		{
+			method: "GET",
+			headers: getCustomHeader(header)
+		},
+		fileHeader
+	);
+	return fetchApi(url, op);
 }
 
 /**
@@ -108,13 +110,13 @@ function get(url, fileHeader, header) {
  * @returns Promise
  */
 function post(url, pd, hd = {}) {
-  let op = Object.assign({}, option, {
-    method: "POST",
-    body: typeof pd === "string" ? pd : JSON.stringify(pd),
-    headers: getCustomHeader(hd),
-  });
+	const op = Object.assign({}, option, {
+		method: "POST",
+		body: typeof pd === "string" ? pd : JSON.stringify(pd),
+		headers: getCustomHeader(hd)
+	});
 
-  return fetchApi(url, op);
+	return fetchApi(url, op);
 }
 
 // /**
@@ -127,17 +129,31 @@ function post(url, pd, hd = {}) {
 //  * @returns Promise
 //  */
 function del(url, pd) {
-  if (!pd) {
-    pd = {};
-  }
-  let op = Object.assign({}, option, {
-    method: "DELETE",
-    body: JSON.stringify(pd),
-    headers: getCustomHeader(),
-  });
+	if (!pd) {
+		pd = {};
+	}
+	const op = Object.assign({}, option, {
+		method: "DELETE",
+		body: JSON.stringify(pd),
+		headers: getCustomHeader()
+	});
 
-  return fetchApi(url, op);
+	return fetchApi(url, op);
 }
+// private
+const getCustomHeaderLogin = function (header = {}) {
+	const result = {
+		Accept: "application/json",
+		...header
+	};
+
+	const token = tokenHelper.get();
+	if (token) {
+		result[TOKEN_KEY] = token;
+	}
+
+	return result;
+};
 
 /**
  * Call server API based on HTTP POST
@@ -151,33 +167,18 @@ function del(url, pd) {
  * @returns Promise
  */
 function postForm(url, pd, hd = {}) {
-  let op = Object.assign({}, option, {
-    method: "POST",
-    body: pd,
-    headers: getCustomHeader22(hd),
-  });
+	const op = Object.assign({}, option, {
+		method: "POST",
+		body: pd,
+		headers: getCustomHeaderLogin(hd)
+	});
 
-  return fetchApi(url, op);
+	return fetchApi(url, op);
 }
 
-// private
-let getCustomHeader22 = function (header = {}) {
-  let result = {
-    Accept: "application/json",
-    ...header,
-  };
-
-  let token = tokenHelper.get();
-  if (token) {
-    result[TOKEN_KEY] = token;
-  }
-
-  return result;
-};
-
 export default {
-  get,
-  post,
-  del,
-  postForm,
+	get,
+	post,
+	del,
+	postForm
 };

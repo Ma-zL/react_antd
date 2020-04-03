@@ -21,6 +21,8 @@
   },
   "plugins": ["react"],
   "rules": {
+    "no-tabs": "off",
+    "indent": ["error", "tab"],
     "quotes": ["error", "double"],
     "space-before-function-paren": 0,
     "eol-last": 0,
@@ -64,8 +66,9 @@
         "afterColon": true
       }
     ],
+    "generator-star-spacing": 0,
     "block-scoped-var": 0,
-    "consistent-return": 2,
+    "consistent-return": 0,
     "accessor-pairs": 2,
     "dot-location": [2, "property"],
     "no-lone-blocks": 2,
@@ -95,7 +98,7 @@
     "no-with": 1,
     "space-infix-ops": 2,
     "valid-jsdoc": [
-      2,
+      0,
       {
         "requireParamDescription": true,
         "requireReturnDescription": true

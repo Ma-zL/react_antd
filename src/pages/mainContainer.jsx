@@ -2,7 +2,7 @@ import React from "react";
 import { view as V } from "modules/mainContainer";
 
 const mainContainer = () => {
-  return <V />;
+	return <V />;
 };
 
 export default mainContainer;

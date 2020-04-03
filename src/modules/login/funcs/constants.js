@@ -12,17 +12,17 @@ export const LOGIN_REQUEST_SUCCESS = "LOGIN/LOGIN_REQUEST_SUCCESS";
 /**
  * define actions
  */
-export const loginAction = (loginPost) => {
-  return {
-    type: LOGIN_REQUEST,
-    loginPost,
-    loginSuccess: false,
-  };
+export const loginAction = loginPost => {
+	return {
+		type: LOGIN_REQUEST,
+		loginPost,
+		loginSuccess: false
+	};
 };
 
 export const loginSuccess = () => {
-  return {
-    type: LOGIN_REQUEST_SUCCESS,
-    loginSuccess: true,
-  };
+	return {
+		type: LOGIN_REQUEST_SUCCESS,
+		loginSuccess: true
+	};
 };

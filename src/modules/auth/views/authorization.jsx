@@ -3,19 +3,19 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 class Authorization extends Component {
-  render() {
-    return null;
-  }
+	render() {
+		return null;
+	}
 }
 
 Authorization.propTypes = {};
 
 const mapStateToProps = (state, ownProps) => {
-  return {};
+	return {};
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {};
+const mapDispatchToProps = dispatch => {
+	return {};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Authorization);

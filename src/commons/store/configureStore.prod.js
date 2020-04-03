@@ -4,21 +4,21 @@ import createReducer from "../utils/createReducer";
 
 export const sagaMiddleware = createSagaMiddleware();
 
-let finalCreateStore = compose(applyMiddleware(sagaMiddleware))(createStore);
+const finalCreateStore = compose(applyMiddleware(sagaMiddleware))(createStore);
 
 export function configureStore(initialState) {
-  let store = finalCreateStore(createReducer(), initialState);
-  store.asyncReducers = {};
-  return store;
+	const store = finalCreateStore(createReducer(), initialState);
+	store.asyncReducers = {};
+	return store;
 }
 
 export function injectAsyncReducer(store, name, asyncReducer) {
-  store.asyncReducers[name] = asyncReducer;
-  store.replaceReducer(createReducer(store.asyncReducers));
+	store.asyncReducers[name] = asyncReducer;
+	store.replaceReducer(createReducer(store.asyncReducers));
 }
 
 export function resetAsyncReducer(store) {
-  store.asyncReducers = [];
+	store.asyncReducers = [];
 }
 
 const app = configureStore();

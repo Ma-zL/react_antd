@@ -19,7 +19,7 @@ import { TOKEN_KEY } from "../constants/const";
  * @param {string} token token string from server side
  */
 function set(token) {
-  sessionStorage.setItem(TOKEN_KEY, token);
+	sessionStorage.setItem(TOKEN_KEY, token);
 }
 
 /**
@@ -30,7 +30,7 @@ function set(token) {
  * @returns current token
  */
 function get() {
-  return sessionStorage.getItem(TOKEN_KEY);
+	return sessionStorage.getItem(TOKEN_KEY);
 }
 
 /**
@@ -41,11 +41,11 @@ function get() {
  *
  */
 function remove() {
-  sessionStorage.removeItem(TOKEN_KEY);
+	sessionStorage.removeItem(TOKEN_KEY);
 }
 
 export default {
-  set,
-  get,
-  remove,
+	set,
+	get,
+	remove
 };

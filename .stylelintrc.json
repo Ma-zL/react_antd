@@ -1,0 +1,22 @@
+ {
+	"extends": "stylelint-config-standard",
+	"ignoreFiles": [
+		"node_modules/**/*.scss",
+		"**/*.md",
+		"**/*.ts",
+		"**/*.jsx",
+		"**/*.js"
+	],
+	"rules": {
+		"indentation": 4,
+		"at-rule-empty-line-before": "never",
+		"no-missing-end-of-source-newline": null,
+		"at-rule-no-unknown": null,
+		"selector-pseudo-class-no-unknown": [
+			true,
+			{
+				"ignorePseudoClasses": ["golbal", "local"]
+			}
+		]
+	}
+}
